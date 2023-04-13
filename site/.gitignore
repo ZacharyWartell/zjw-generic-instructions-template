@@ -1,0 +1,11 @@
+**/node_modules
+*.bak
+*.*~
+*.swp
+*.js.map
+www-site-mirror
+scripts/zjwgi
+site/css/zjwgi
+site/images/zjwgi
+site/scripts/zjwgi
+site/html/zjwgi
