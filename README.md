@@ -9,7 +9,7 @@ Example:
 - $ git submodule init
 - $ git submodule update
 - Add  git remote origin to reference your assignment description remote repo
-- Initalize your origin and local repo as follows:
+- Initalize your local repo directory and the remote origin as follows:
     - Windows CMD:
         - $ cd site/git_modules/zjwgi/scripts/
         - $ init-template.bat
