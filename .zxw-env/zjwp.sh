@@ -1,1 +1,3 @@
-. ./scripts/zjwp/zjwp-set-path
+pushd scripts
+. ./zjwp/zjwp-set-path
+popd
