@@ -3,7 +3,7 @@
 ## Git: [https://gitlab.com/zwartell/zjw-generic-instructions-template](https://github.com/ZacharyWartell/zjw-generic-instructions-template)
 
 Examples:
-    - [https://webpages.charlotte.edu/zwartell/](https://webpages.charlotte.edu/zwartell/)
+    - See "Teaching Materials" at [https://webpages.charlotte.edu/zwartell/](https://webpages.charlotte.edu/zwartell/)
 
 - To create a repo for your new assignment description that uses zjw-generic-instructions
     - Git fork this repo as the upstream remote of you new assignment description
