@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div id="UserDocument">
+        <article>
+            <h2 class="nocount Title">ITCS <span data-course-number="">3120</span> : WebGL Tutorial 1 </h2>
+            <h2 class="nocount Title">Spring 2026</h2>
+            <h3 class="nocount Title"> Revision: <span class="Revision"><!--BUILDDATE-->2026-02-16 10:37:34 -0500</span>
+                <sup> (<a href="https://gitlab.com/zachary-wartell/webgl-tutorial/-/commits/version2"
+                        target="_blank">git logs</a>) </sup> </h3>
+            <div style="text-align: center;"> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+                    <img alt="Creative Commons License" style="border-width:0"
+                        src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></img></a> <!--               -->
+                <br> <span>"ITCS <span data-course-number="">3120</span> : WebGL Tutorial" </span> by <a
+                    href="https://webpages.uncc.edu/zwartell/" rel="cc:attributionURL" target="_blank"
+                    title="https://webpages.uncc.edu/zwartell/">Zachary Justin Wartell</a> is licensed under a <a
+                    rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons
+                    Attribution-NonCommercial-ShareAlike 4.0 International License</a>. </div>
+            <hr>
+            </hr>
+            <section id="Section_1">
+                <h2 class="nocount">Compatibility</h2>
+                <p>This page has been tested on Chrome 144.</p>
+                <h2 class="nocount">Objectives</h2>
+                <ul>
+                    <li>Apply basic <div class="CommentSelection">knowledge of HTML and JavaScrip<div
+                                class="CommentBlock"><textarea style="height: 210px; width: 246px;"></textarea></div>
+                        </div>t event handling</li>
+                    <li>Learn basics of WebGL from WebGL Programming Guide (Matsuda & Lea, <a target="_blank"
+                            href="https://read.amazon.com/?asin=B00DS74080">Amazon ASIN Link</a>) </li>
+                    <li>Develop skills in implementing simple 2D geometric algorithms</li>
+                </ul>
+            </section>
+            <section id="Section_1">
+                <h2 class="nocount">Grading</h2> This assignment is worth a total of <span
+                    data-total-points="">200</span> points. <br> Each instruction item is prefixed with,
+                |<i>number</i>|, that displays the points for that item. |<i>number</i>| indicates that item is worth
+                <i>number</i> points. |∑ <i>number</i>| indicates that item is a composite item and the sum of all its
+                parts is worth <i>number</i> points. The complete rubric is listed separately in Section <a
+                    href="#Section_Rubric">Rubric</a> <!--     -->
+            </section>
+            <section data-point-fraction="5" class="Instruction_Section" id="Section_1">
+                <h2 class="Section">Project and Repo Setup </h2> The instructions in this assignment assume you have
+                already setup Visual Studio Code and your ITCS_3120 directory, <span class="File_Name"> ~/ITCS_<span
+                        class="" data-course-number="">3120</span></span> as described in the earlier assignment <a
+                    target="_blank"
+                    href="https://webpages.charlotte.edu/zwartell/Teaching/ITCS%203120%20-%20VS%20Code%20Tutorial/">ITCS
+                    3120 : Visual Studio Code Tutorial</a>
+                <ol class="Instruction">
+                    <li class="Instruction_Todo" id="Section_1_Item_1"><span class="Instruction_Title">New Repo</span> 
+                        Create a new remote repository on the Git server called <span class="File_Name">"itcs<span
+                                data-course-number="">3120</span>-<span
+                                data-project-number="">t5</span>-webgl-tutorial-1"</span>.<br> Follow all the standard
+                        practices for the course, (see <a target="_blank"
+                            href="https://webpages.charlotte.edu/zwartell/Teaching/Git%20Tutorial/Git%20Tutorial.html#How_to_Create_New_Remote_Repository">https://webpages.charlotte.edu/zwartell/Teaching/Git%20Tutorial/Git%20Tutorial.html#How_to_Create_New_Remote_Repository)
+                        </a><br> </li>
+                    <li class="Instruction_Todo" id="Section_1_Item_2"><span class="Instruction_Title">Clone</span> 
+                        Clone your repo into your course directory <br>
+                        <table class="Code_Example" id="Code_Example5" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td><button onclick="Code_Example_Toggle('Code_Example_Example');">▽</button> </td>
+                                    <td>
+                                        <div style="height : fit-content;"> <code
+                                                class="Shell_Code_Prompt">lucretius@Monad42                              ~/ITCS_<span  class="" data-course-number="">3120</span>/</code>
+                                            <code
+                                                class="Shell_Code_Input">                              $git clone <span  class="User_Input">URL_To_Your_Repository</span>/<span  style="File_Name"><span  class="" data-project-number-long-dir="">3120-t5-webgl-tutorial</span></span>.git                              </code>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li class="Instruction_Todo" id="Section_1_Item_3"><span class="Instruction_Title">VS Code Project
+                            Setup</span>  Keep one window and instance of VS Code open to the <span
+                            class="File_Name">WebGL_Programming_Guide</span> directory.  Now you will open a second
+                        window and instance of VSCode for your own code. From the VS Code main menu  select,   <span
+                            style="white-space: nowrap;" class="File_Name">File -> New Window.</span> This will open a
+                        new window and new instance of VS Code.   In the new instance select <span
+                            class="File_Name">Open Folder.<span style="font-family: serif;">  Open your project folder
+                                <span data-project-number="">t5</span>-webgl-tutorial-1.</span></span> <br> <br> During
+                        this tutorial keep both of these two instances of VSCode open.    </li>
+                    <li class="Instruction_Composite" id="Section_1_Item_4"><span class="Instruction_Title">Initial
+                            Files</span> In directory <span class="File_Name"><span style=" font-family: serif;"><span
+                                    class="File_Name"><span data-project-number="">t5</span>-webgl-tutorial-1<span
+                                        style="font-family: serif;">, </span></span>create the following new files:<br>
+                            </span> </span>
+                        <ol>
+                            <li class="Instruction_Todo" id="Section_1_Item_4_a"><span
+                                    class="File_Name">readme.md</span></li>
+                            <li class="Instruction_Todo" id="Section_1_Item_4_b"><span
+                                    class="File_Name">.gitignore</span></li>
+                            <li class="Instruction_Todo" id="Section_1_Item_4_c"><span
+                                    class="File_Name">questions.<i>xyz</i></span> - This submitted file must be either
+                                an MS Word (<i>questions.docx) </i>or PDF file (<i>question.pdf</i>).   The file format
+                                must support inclusion of drawings, images, etc.  <br> <br> Verify that these files
+                                appear both in the left side VSCode Explorer panel <u>and</u> verify in bash that they
+                                are in your <span class="File_Name"><span
+                                        data-project-number="">t5</span>-webgl-tutorial-1</span> directory. </li>
+                            <li class="Instruction_Git_Commit" id="Section_1_Item_4_d">Git commit all the files with
+                                message <span class="Git_Commit_Message">"-initial files"</span> </li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+            <section data-point-fraction="10" class="Instruction_Section" id="Section_2">
+                <h2 class="Section">WebGL PG: Chapter 1</h2>
+                <ol class="Instruction">
+                    <li class="Instruction_Read" id="Section_2_Item_1"><span class="Instruction_Title">Chapter 1: 
+                            Overview of WebGL</span> - read this chapter.   There are no associated exercises for this
+                        chapter. </li>
+                </ol>
+            </section>
+            <section data-point-fraction="60" class="Instruction_Section" id="Section_3">
+                <h2 class="Section"> WebGL PG: Chapter 2</h2>
+                <p>For Chapter 2, read one section of Chapter 2 at a time.  While reading each section the chapter,
+                    perform the exercises below associated with each section.</p>
+                <p> While reading, open up each example program in a browser. Use the browser’s Development Tools to
+                    examine all the HTML, JavaScript and WebGL shader code in the browser script viewer windows, while
+                    you read Chapter 2’s description of the code. </p>
+                <ol class="Instruction">
+                    <li data-point-fraction="0" class="Instruction_Read" id="Section_3_Item_1"><span
+                            class="Instruction_Title">WebGL PG: Chapter 2.  Your First Step with WebGL</span> - read
+                        introductory paragraphs</li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_2"><span
+                            class="Instruction_Title">Chapter 2:  Section "What Is a Canvas"</span> - [page 52] <ol>
+                            <li data-point-fraction="0" class="Instruction_Read" id="Section_3_Item_2_a">Read this
+                                section of Chapter 2.   When you reach the discussion about the code for Figure 2.2,
+                                open the DrawRectangle.html, DrawRectangle.js files in VSCode and study the code as the
+                                book walks you through it.  Run the program in VSCode.   To do so in the VSCode
+                                Explorer, panel right-click <span>DrawRectangle.html</span> and select <span>Open with
+                                    Live Server</span>.   Use the Chrome debugger tools to step through the executing
+                                DrawRectangle to solidify your understanding of the program. </li>
+                            <li data-point-fraction="100" class="Instruction_Composite" id="Section_3_Item_2_b"><span
+                                    class="Instruction_Title">Exercise [DrawRectangle]</span> In this exercise you will
+                                modify the DrawRectangle program.<br>
+                                <ol>
+                                    <li data-point-fraction="4" class="Instruction_Todo" id="Section_3_Item_2_b_i">
+                                        Create the directory structure illustrated below by copying the indicated files
+                                        from the WebGL_Programming_Guide directories to your <span
+                                            data-project-number="">t5</span>-webgl-tutorial-1 directory. (For
+                                        concreteness, the directory structure is illustrated as listed by the bash <a
+                                            target="_blank"
+                                            href="https://man7.org/linux/man-pages/man1/find.1.html">find</a>
+                                        command.):<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find . </code> <code
+                                                                class="Shell_Code_Output"><br>                                      ./.gitignore<br>                                      ./.vscode </code><br>
+                                                            <code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">                                        ./readme.md</code></code><br>
+                                                            <code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">                                        ./questions.docx</code><br>
+                                                            ./lib<br> ./lib/cuon-matrix.js<br> ./lib/cuon-utils.js<br>
+                                                            ./lib/webgl-debug.js<br> ./lib/webgl-utils.js<br>
+                                                            ./DrawRectangle<br> </code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">                                        ./DrawRectangle</code>/DrawRectangle.html<br>
+                                                            </code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output"><code  class="Shell_Code_Output">./DrawRectangle</code>/DrawRectangle.j</code>s<br>
+                                                            </code> </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li data-point-fraction="0" class="Instruction_Todo" id="Section_3_Item_2_b_ii">In
+                                        the VSCode instance for your <span
+                                            data-project-number="">t5</span>-webgl-tutorial-1 folder,  verify that you
+                                        can run DrawRectangle.html using Open with Live Server. </li>
+                                    <li data-point-fraction="10" class="Instruction_Todo" id="Section_3_Item_2_b_iii">
+                                        Change the code to draw the rectangle at a size that is 1.5 times larger.</li>
+                                    <li data-point-fraction="10" class="Instruction_Todo" id="Section_3_Item_2_b_iv">
+                                        Change the color of the original rectangle to any other color </li>
+                                    <li data-point-fraction="15" class="Instruction_Todo" id="Section_3_Item_2_b_v">Add
+                                        second rectangle of any color and size and position you choose on the canvas.
+                                    </li>
+                                    <li data-point-fraction="60" class="Instruction_Todo" id="Section_3_Item_2_b_vi">Add
+                                        a third additional object the looks something like the following.   This object
+                                        is a rectangle made of 36 other rectangles aligned in a grid with each small
+                                        rectangle having a different color.   (You choose the colors, over size and
+                                        position on of this third object).<br> <img
+                                            src="./images/colored-squares.png"></img> </li>
+                                    <li data-point-fraction="1" class="Instruction_Git_Commit"
+                                        id="Section_3_Item_2_b_vii"><span
+                                            class="Instruction_Title"><strong>Git</strong></span> add and commit this
+                                        updated code using the commit message:<br> <span
+                                            class="Git_Commit_Message">"-completed DrawRectangle"</span> <br> </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_3"><span
+                            class="Instruction_Title">Chapter 2:  Section “The World’s Shortest WebGL Program: Clear
+                            Drawing Area</span> - [page 63] <br>
+                        <ol>
+                            <li class="Instruction_Read" id="Section_3_Item_3_a"><span>Read this section of Chapter 2.
+                                    When you reach the discussion about the code for Chapter 2's Figure 2.6, open the
+                                    HelloCanvas</span>.html in your WebGL_Programming_Guide VSCode instance.  Study the
+                                programs code as the book walks you through it.  Run the program in VSCode with the
+                                <span>Live Server</span>.   Use the Chrome debugger tools to step through the executing
+                                code to solidify your understanding of the program.</li>
+                            <li class="Instruction_Composite" id="Section_3_Item_3_b"><span
+                                    class="Instruction_Title">Exercise [HelloCanvas]</span> <br> In this exercise you
+                                will modify the HelloCanvas program. <ol>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_i">
+                                        Create the directory structure as illustrated below by copying files from the
+                                        WebGL_Programming_Guide directory:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./HelloCanvas</code><br>
+                                                            <code
+                                                                class="Shell_Code_Output">./HelloCanvas/HelloCanvas.html</code><br>
+                                                            <code
+                                                                class="Shell_Code_Output">./HelloCanvas/HelloCanvas.js</code><br>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_ii">
+                                        Add an additional console log message when the GLContext is successfully
+                                        created.</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_iii">
+                                        Change the Canvas size to 800 by 800 </li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_iv">
+                                        Modify the clear color is red.</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_v">
+                                        <span class="Instruction_Title"><strong>Git</strong></span> add all the updated
+                                        code the message:    '-adjusting size and color'</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_3_b_vi">
+                                        Modify the code so that the clear color is randomly chosen every time the page
+                                        is<br> loaded (i.e. if the user hit browser “Reload” button, she should see a
+                                        different, random color each time).<br> <br> <u>JavaScript Hint</u>: See:<br>
+                                               <a class="WindowOpenLeft"
+                                            onclick="windowOpenLeft('https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random','MDN');">
+                                            https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+                                        </a> </li>
+                                    <li data-point-fraction="1" class="Instruction_Git_Commit"
+                                        id="Section_3_Item_3_b_vii"><span
+                                            class="Instruction_Title"><strong>Git</strong></span> add, commit with a
+                                        single commit using the message:  <span class="Git_Commit_Message">"-added
+                                            random coloring"</span> </li>
+                                </ol>
+                            </li>
+                        </ol> <br>
+                        <ol> </ol>
+                        <ol> </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Todo" id="Section_3_Item_4"><span
+                            class="Instruction_Title">Appendix A. No Need to Swap Buffers in WebGL</span> - [page
+                        740]<br>
+                        <ol>
+                            <li data-point-fraction="0" class="Instruction_Read" id="Section_3_Item_4_a"> Read this
+                                section of the WebGL PG book.  Pay attention to the discussion on alert and confirm;
+                                note the wording: <br> <br> "This implies that if you call methods that return control
+                                to the browser, such as alert() or confirm(), the browser may then display the contents
+                                of the color buffer to the screen." <br> </li>
+                            <li data-point-fraction="100" id="Section_3_Item_4_b"><span
+                                    class="Instruction_Title">Questions</span>
+                                <ol>
+                                    <li data-point-fraction="0" class="Instruction_Todo" id="Section_3_Item_4_b_i">Open
+                                        <span class="File_Name">WebGL_Programming_Guide\ITCS 4120
+                                            Extra\ch02\HelloCanvas1.html</span> in a browser and study the js code.<br>
+                                        <br> For the questions below, put your answers in your Questions file.</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Question"
+                                        id="Section_3_Item_4_b_ii">Question 1: Before executing it, what do you expect
+                                        to see?</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_4_b_iii">
+                                        Execute the code.</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Question"
+                                        id="Section_3_Item_4_b_iv">Question 2: What do you see? </li>
+                                    <li data-point-fraction="16.5" class="Instruction_Todo" id="Section_3_Item_4_b_v">
+                                        Change enableAlert to true and save the file. Execute the code again.</li>
+                                    <li data-point-fraction="16.5" class="Instruction_Question"
+                                        id="Section_3_Item_4_b_vi">Question 3: What do you see? </li>
+                                    <li data-point-fraction="16.5" class="Instruction_Question"
+                                        id="Section_3_Item_4_b_vii">Question 4:<br> Regarding Question 3, you may see
+                                        different behavior in different browsers and even different versions of the same
+                                        browser (Chrome’s behavior changed between 2015 and 2016!). In some browsers’
+                                        the “may” in the earlier quote, turns out to be “does  not” and in others it
+                                        turns out to be “does”. Assume, that in a particular browser in the second case
+                                        (ix), you do see all 4 different colors. For such as browser, answer the
+                                        following question: Using you knowledge of how double buffering works (discussed
+                                        in class) and using the discussion in WebGL book Appendix A, explain in writing
+                                        why, in the first case (vii), you only see a black square, but in the second
+                                        case (ix) you see 4 different colored squares -- even though in the first case
+                                        there is a delay loop that should allow you to see the other 4 colors, each for
+                                        a brief moment.<br> <br> Use a diagram (neat, scanned hand sketched pictures are
+                                        ok; or use your preferred drawing tool) to help explain your answer. </li>
+                                    <li data-point-fraction="1" class="Instruction_Git_Commit"
+                                        id="Section_3_Item_4_b_viii">Git commit with message:  <span
+                                            class="Git_Commit_Message">-answered swap buffers questions"</span> </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_5"><span
+                            class="Instruction_Title">Chapter 2:  Section “Draw a Point (Version 1)"</span> - [page
+                        74]<br>
+                        <ol>
+                            <li data-point-fraction="0" id="Section_3_Item_5_a">Read this section of Chapter 2. When you
+                                reach the discussion about the code in Figure 2.9, open the HelloPoint1.html in your
+                                WebGL_Programming_Guide VSCode instance.  Study the programs code as the book walks you
+                                through it.  Use the Live Server and    Use the Chrome debugger tools to solidify your
+                                understanding of the program. </li>
+                            <li data-point-fraction="100" class="Instruction_Composite" id="Section_3_Item_5_b"><span
+                                    class="Instruction_Title">Exercise [Experimenting with the Sample Program]</span> -
+                                [page 99]<br> Chapter 2, page 99 starts sub-section "Experimenting with the Sample
+                                Program".    This sub-section describes specific modifications to make to the code.  
+                                Make the modifications <u>after</u> making a copy of the code as detailed below.<br>
+                                <ol>
+                                    <li data-point-fraction="10" class="Instruction_Todo" id="Section_3_Item_5_b_i">
+                                        Create the directory structure as illustrated below by copying files from the
+                                        WebGL_Programming_Guide directory:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./HelloPoint1</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloPoint1</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output"></code>/</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">HelloPoint1.</code>html</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloPoint1</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output"></code>/</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">HelloPoint1</code>.js</code><br>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li data-point-fraction="89" class="Instruction_Todo" id="Section_3_Item_5_b_ii">
+                                        Perform the books described modifications </li>
+                                    <li data-point-fraction="1" class="Instruction_Todo" id="Section_3_Item_5_b_iii">
+                                        <span class="Instruction_Title"><strong>Git</strong></span> add, commit with the
+                                        message: <span class="Git_Commit_Message">"-exercise Hello Point 1"</span> <br>
+                                    </li>
+                                </ol> <br>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_6"><span
+                            class="Instruction_Title">Chapter 2:  Section “Draw a Point (Version 2)"</span> - [pg
+                        101]<br>
+                        <ol>
+                            <li data-point-fraction="0" class="Instruction_Read" id="Section_3_Item_6_a">Read this
+                                section of Chapter 2. When you reach the discussion about the code in Listing 2.6, open
+                                the HelloPoint2.html in your WebGL_Programming_Guide VSCode instance.  Study the code as
+                                the book walks you through it.  Use the Live Server, the Chrome debugger, etc. to
+                                solidify your understanding of the code.</li>
+                            <li data-point-fraction="100" class="Instruction_Composite" id="Section_3_Item_6_b"><span
+                                    class="Instruction_Title">Exercise [Experimenting with the Sample Program]</span> -
+                                [pg 113]<br> Chapter 2 page 113, starts sub-section "Experimenting with the Sample
+                                Program". This sub-section describes specific modifications to make to the code.   Make
+                                the modifications <u>after</u> making a copy of the code as detailed below.<br>
+                                <ol>
+                                    <li data-point-fraction="5" class="Instruction_Todo" id="Section_3_Item_6_b_i">
+                                        Create the directory structure as illustrated below by copying files from the
+                                        WebGL_Programming_Guide directory:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./HelloPoint2</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloPoint2</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">HelloPoint2.</code>html</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloPoint2</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output"><code  class="Shell_Code_Output">HelloPoint2</code>.js</code><br>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li data-point-fraction="94" class="Instruction_Todo" id="Section_3_Item_6_b_ii">
+                                        Perform the books described modifications </li>
+                                    <li data-point-fraction="1" class="Instruction_Todo" id="Section_3_Item_6_b_iii">
+                                        <span class="Instruction_Title"><strong>Git</strong></span> add, commit with the
+                                        message:<span style="font-family: Courier,monospace;">  </span><span
+                                            class="Git_Commit_Message">"-exercise Hello Point 2"</span> <br> </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_7"><span
+                            class="Instruction_Title">Chapter 2:  Section “Draw a Point with a Mouse Click"</span> - [pg
+                        115] <ol>
+                            <li class="Instruction_Read" id="Section_3_Item_7_a">Read pages 115 to 128 of this section
+                                of Chapter 2. When you reach the discussion about the code in Figure 2.26, open the
+                                ClickedPoints.html in your WebGL_Programming_Guide VSCode instance.  Study the code as
+                                the book walks you through it.  Use the Live Server, the Chrome debugger, etc. to
+                                solidify your understanding of the code.</li>
+                            <li class="Instruction_Composite" id="Section_3_Item_7_b"><span
+                                    class="Instruction_Title">Exercise: [Modernize code to use addEventListener]</span>
+                                - [pg 127]<br> ClickedPoints.js uses the older style of event handlers.   In class
+                                lectures and in the HTML tutorial, you learned the newer addEventLister approach.   Make
+                                the modifications <u>after</u> making a copy of the code as detailed below.<br>
+                                <ol>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_b_i">Create the directory
+                                        structure as illustrated below by copying files from the WebGL_Programming_Guide
+                                        directory:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./ClickedPoints</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">ClickedPoints</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">ClickedPoints.</code><code
+                                                                class="Shell_Code_Output">html</code><br> <code
+                                                                class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">ClickedPoints</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">ClickedPoints</code><code
+                                                                class="Shell_Code_Output">.js</code><br> </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_b_ii">Modify the code to updated
+                                        all the event handling calls to the modern addEventListener approach.</li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_b_iii"><span
+                                            class="Instruction_Title"><strong>Git</strong></span> add, commit with the
+                                        message:<span style="font-family: Courier,monospace;">  </span><span
+                                            class="File_Name">"-exercise ClickedPoints updated to
+                                            addEventListener"</span><br> </li>
+                                </ol>
+                            </li>
+                            <li class="Instruction_Composite" id="Section_3_Item_7_c"><span
+                                    class="Instruction_Title">Exercise [Experimenting with the Sample Program]</span> -
+                                [pg 128] <br> Chapter 2 page 128, starts sub-section "Experimenting with the Sample
+                                Program". This sub-section describes specific modifications to make to the code.   Make
+                                the modifications <u>after</u> making a copy of the code as detailed below.<br>
+                                <ol>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_c_i">Create the directory
+                                        structure as illustrated below by copying files from the WebGL_Programming_Guide
+                                        directory:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;">
+                                                            <cfode class="Shell_Code_Prompt">lucretius@Monad42
+                                                                ~/ITCS_<span class=""
+                                                                    data-course-number="">3120</span>/<span
+                                                                    data-project-number="">t5</span>-webgl-tutorial-1/<br>
+                                                                <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                    class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                                <code
+                                                                    class="Shell_Code_Output">./ClickedPoints2</code><br>
+                                                                <code class="Shell_Code_Output">./</code><code
+                                                                    class="Shell_Code_Output">ClickedPoints2/</code><code
+                                                                    class="Shell_Code_Output">ClickedPoints</code><code
+                                                                    class="Shell_Code_Output"><code  class="Shell_Code_Output">.</code>html</code><br>
+                                                                <code class="Shell_Code_Output">./</code><code
+                                                                    class="Shell_Code_Output">ClickedPoints2/<code  class="Shell_Code_Output">ClickedPoints</code><code
+                                                                    class="Shell_Code_Output">.js</code><br> </code>
+                                                            </cfode>
+                                                        </div> <code class="Shell_Code_Output"> </code>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_c_ii">Perform the books described
+                                        modifications</li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_7_c_iii"><span
+                                            class="Instruction_Title"><strong>Git</strong></span> add, commit with the
+                                        message:<span style="font-family: Courier,monospace;">  </span><span
+                                            class="Git_Commit_Message">"-exercise Hello Point 2"</span> <br> </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="14.28571429" class="Instruction_Composite" id="Section_3_Item_8"><span
+                            class="Instruction_Title">Chapter 2: Change the Point Color</span> - [pg 130]<br>
+                        <ol>
+                            <li class="Instruction_Todo" id="Section_3_Item_8_a">Read pages 130 to 143 of this section
+                                of Chapter 2. When you reach the discussion about the code in Figure 2.29, open the
+                                ColorsPoints.html in your WebGL_Programming_Guide VSCode instance.  Study the code as
+                                the book walks you through it.  Use the Live Server, the Chrome debugger, etc. to
+                                solidify your understanding of the code.</li>
+                            <li class="Instruction_Composite" id="Section_3_Item_8_b"><span
+                                    class="Instruction_Title">Exercise: [Color By Octant]</span> <br> In this exercise,
+                                you will change the code of ColoredPoints use 8 different colors. Instead of having a
+                                one color per quadrant conceptually divide the canvas up into 8 equal sized octants
+                                defined using 2 additional diagonal lines, at +45 and - 45 degrees as shown below: <br>
+                                <img src="images/divided-square.png" alt="" width="200px"></img>
+                                <ol>
+                                    <li class="Instruction_Todo" id="Section_3_Item_8_b_i">First, make the following
+                                        modifications <u>after</u> making a copy of the code as detailed below.<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./ColorsPoints</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">ColorsPoints</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">ColorsPoints.</code><code
+                                                                class="Shell_Code_Output">html</code><br> <code
+                                                                class="Shell_Code_Output">./ColorsPoints</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">ColorsPoints</code><code
+                                                                class="Shell_Code_Output">.</code><code
+                                                                class="Shell_Code_Output"></code><code
+                                                                class="Shell_Code_Output">js</code><br> </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_8_b_ii">Modified the code as
+                                        described.</li>
+                                    <li class="Instruction_Todo" id="Section_3_Item_8_b_iii">Git add, commit with the
+                                        message:  "-exercise ColoredPoints with octants"</li>
+                                </ol> <br>
+                                <ol> </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+            <section data-point-fraction="25" class="Instruction_Section" id="Section_4">
+                <h2 class="Section">WebGL PG: Chapter 3</h2> Read Chapter 3 page 144 - 173 (stopping <u>before</u>
+                sub-section "Basic Shapes").<br>
+                <ol class="Instruction">
+                    <li data-point-fraction="60" class="Instruction_Composite" id="Section_4_Item_1"><span
+                            class="Instruction_Title">Chapter 3:  Section Drawing Multiple Points</span> - [pg 144-170]
+                        <ol>
+                            <li class="Instruction_Read" data-point-fraction="0" id="Section_4_Item_1_a">Read pages 130
+                                to 143 of this section of Chapter 3. When you reach sub-section "Sample Program
+                                (MultiPoint.js)" on page 147, open the MultiPoint.html in your WebGL_Programming_Guide
+                                VSCode instance.  Study the code as the book walks you through it.  Use the Live Server,
+                                the Chrome debugger, etc. to solidify your understanding of the code.  Continue reading
+                                up stop right before sub-section "Experimenting with the Sample Program" on page 169.
+                            </li>
+                            <li class="Instruction_Composite" data-point-fraction="100" id="Section_4_Item_1_b"><span
+                                    class="Instruction_Title">Exercise [MultiPoint Circle]</span> <br> Starting on page
+                                169, sub-section "Experimenting with the Sample Program" discusses modifying the
+                                MultiPoint program.  Make a copy of the MultiPoint as described below and perform the
+                                suggested experiments:<br>
+                                <ol>
+                                    <li class="Instruction_Todo" data-point-fraction="1" id="Section_4_Item_1_b_i">Copy
+                                        the MultiPoint code into the directory structure shown below:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./MultiPoint</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">MultiPoint</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">MultiPoint</code><code
+                                                                class="Shell_Code_Output">.</code><code
+                                                                class="Shell_Code_Output">html</code><br> <code
+                                                                class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">MultiPoint</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">MultiPoint</code><code
+                                                                class="Shell_Code_Output">.</code><code
+                                                                class="Shell_Code_Output"></code><code
+                                                                class="Shell_Code_Output">js</code><br> </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li class="Instruction_Todo" data-point-fraction="1" id="Section_4_Item_1_b_ii">
+                                        Perform the experiments discussed in the section "Experimenting with the Sample
+                                        Program" </li>
+                                    <li class="Instruction_Todo" data-point-fraction="48" id="Section_4_Item_1_b_iii">
+                                        Modified the code to produce 50 points instead of 3 and to arrange them on a the
+                                        circumference of a circle. Use the parametric equation of a ciicle to place the
+                                        points (see <a class="WindowOpenLeft"
+                                            onclick="windowOpenLeft('https://mathworld.wolfram.com/ParametricEquations.html','MWW');">https://mathworld.wolfram.com/ParametricEquations.html</a>
+                                    </li>
+                                    <li class="Instruction_Todo" data-point-fraction="49" id="Section_4_Item_1_b_iv">Add
+                                        a keyboard user interface where the key pair 'q' and 'w' raises and lowers the
+                                        value to the parameter <code>first</code>, in the
+                                        <code>gl.drawArrays(..., first, count)</code>, and 'a' and 's' raises and lowers
+                                        the value to <code>count</code> </li>
+                                    <li class="Instruction_Todo" data-point-fraction="1" id="Section_4_Item_1_b_v">Git
+                                        commit with message:   "-exercise MultiPoint circle"</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                    <li data-point-fraction="40" class="Instruction_Composite" id="Section_4_Item_2"><span
+                            class="Instruction_Title">Chapter 3:  Section Hello Triangle</span> - [pg
+                        170-<strong>173</strong><u>]</u><br>
+                        <ol>
+                            <li data-point-fraction="0" class="Instruction_Read" id="Section_4_Item_2_a">Read pages 170
+                                to 173 of this section of Chapter 3, but stop before sub-section "Basic Shapes".   While
+                                reading, open the HelloTriangle.html in your WebGL_Programming_Guide VSCode instance. 
+                                Study the code as the book walks you through it.  Use the Live Server, the Chrome
+                                debugger, etc. to solidify your understanding of the code. </li>
+                            <li data-point-fraction="100" class="Instruction_Composite" id="Section_4_Item_2_b"> <span
+                                    class="Instruction_Title">Exercise [Refactor GLSL as script's]</span> <br>
+                                <ol>
+                                    <li data-point-fraction="5" class="Instruction_Todo" id="Section_4_Item_2_b_i">Copy
+                                        the HelloTriangle code into the directory structure shown below:<br>
+                                        <table class="Code_Example">
+                                            <tbody>
+                                                <tr>
+                                                    <td><button>▽</button></td>
+                                                    <td>
+                                                        <div style="height: fit-content;"> <code
+                                                                class="Shell_Code_Prompt">lucretius@Monad42                                      ~/ITCS_<span  class="" data-course-number="">3120</span>/<span  data-project-number="">t5</span>-webgl-tutorial-1/</code><br>
+                                                            <code class="Shell_Code_Input">$find .</code><br> <code
+                                                                class="Shell_Code_Output"><span  class="Shell_Code_Comment">[..other                                        details elided..]</span></code><br>
+                                                            <code class="Shell_Code_Output">./HelloTriangle</code><br>
+                                                            <code class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloTriangle</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">HelloTriangle</code><code
+                                                                class="Shell_Code_Output">.</code><code
+                                                                class="Shell_Code_Output">html</code><br> <code
+                                                                class="Shell_Code_Output">./</code><code
+                                                                class="Shell_Code_Output">HelloTriangle</code><code
+                                                                class="Shell_Code_Output">/</code><code
+                                                                class="Shell_Code_Output">HelloTriangle</code><code
+                                                                class="Shell_Code_Output">.</code><code
+                                                                class="Shell_Code_Output"></code><code
+                                                                class="Shell_Code_Output">js</code><br> </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li data-point-fraction="1" class="Instruction_Git_Commit"
+                                        id="Section_4_Item_2_b_ii"><strong>Git </strong>add and commit with
+                                        message:           <span class="Git_Commit_Message">"-initial
+                                            HelloTriangle"</span> </li>
+                                    <li data-point-fraction="93" class="Instruction_Composite"
+                                        id="Section_4_Item_2_b_iii"> <span class="Instruction_Title">[Refactor Shader
+                                            Code for Scalability]</span> Many of the WebGL_Programming_Guide code
+                                        examples encode the shader code as JavaScript strings. This reduces the number
+                                        of files and allows many of the examples to run without a server.   But this
+                                        approach does not scale to real WebGL programs.   Next, you will refactor
+                                        HelloTriangle to use a different approach.<br>
+                                        <ol>
+                                            <li class="Instruction_Todo" id="Section_4_Item_2_b_iii_1">In
+                                                HelloTriangle.html, add the following elements to the element:<br> <br>
+                                                <code>                                                        <script  id="VertexShader1" type="x-shader/x-vertex">  </script>                                                                                         <br>                                                        <script  id="FragmentShader1" type="x-shader/x-fragment">  </script>                                                </code>
+                                                <br> </li>
+                                            <li class="Instruction_Read" id="Section_4_Item_2_b_iii_2">Observe that both
+                                                shaders in HelloTriangle.js are encoded as the strings VSHADER_SOURCE
+                                                and FSHADER_SOURCE.  Rewrite them as GLSL code inside the text content
+                                                of the two script elements added above.Then delete the VSHADER_SOURCE
+                                                and FSHADER_SOURCE strings from the.js file.</li>
+                                            <li class="Instruction_Todo" id="Section_4_Item_2_b_iii_3">In the .js file,
+                                                replace the line:<br>
+                                                <code>    if (!initShaders(gl,                                VSHADER_SOURCE, FSHADER_SOURCE))</code>
+                                                <br> with <br>        
+                                                <code>if                                (!initShaders(gl, document.getElementByID                                  ("VertexShader1").innerText,<br>                                                                                       document.getElementByID("FragmentShader1").innerText))                                </code>
+                                                <br> <br> Review the DOM documentation on <a class="WindowOpenLeft"
+                                                    onclick="windowOpenLeft('https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById','MDN');">document.getElementByID</a>
+                                                and <a class="WindowOpenLeft"
+                                                    onclick="windowOpenLeft('https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText','MDN');">element.innerText</a>
+                                                so you understand the purpose of these changes. </li>
+                                            <li class="Instruction_Read" id="Section_4_Item_2_b_iii_4">Verify that
+                                                HelloTriangle.html still runs as expected. </li>
+                                        </ol>
+                                    </li>
+                                    <li data-point-fraction="1" class="Instruction_Git_Commit"
+                                        id="Section_4_Item_2_b_iv"><strong>Git </strong>add and commit with message:
+                                                  <span class="Git_Commit_Message"> "-refactored HelloTriangle to place
+                                            GLSL into gt&; script lt&; elements." </span> </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+            <section id="Section_5">
+                <h1 id="Section_Rubric">Appendix I: Rubric</h1>
+                <!--                                     <div style="border: solid 1px" hidden="">              <p style="background-color: yellow; color: red; text-align: center;"><em>[3/12/2021                  - 12:05am] Section&nbsp; Under Construction<br>                </em></p>              This Tutorial is out of will be 160 total points<br>              The rubric is generated from the "<strong>[x pts]</strong>"<strong>              </strong>labels<strong> </strong>next to each of the tutorial<strong>              </strong><u>Exercise</u><strong>:'s.<br>                <br>              </strong>ZJW: 3/12/2021:&nbsp; The rubric is nearly complete<strong>.<br>              </strong>            </div>            -->
+                <div>
+                    <div id="Div_Rubric">
+                        <div>
+                            <table id="RubricAwardedPointsTable" class="RubricAwardedPointsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Combination</th> <!--                 <th>Completed</th> -->
+                                        <th>Max Points</th>
+                                        <th>Awarded Points</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><!--                 </td><td>--><br> </td>
+                                        <td><span data-total-points="">200</span><br> </td>
+                                        <td><span id="AwardedPoints" data-zxw-mvc="dynamic-content"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table> <br>
+                        </div>
+                        <table class="Rubric" id="RubricTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="43">Section</th>
+                                    <th scope="col" width="43">Item</th>
+                                    <th scope="col" width="43">Category</th>
+                                    <th scope="col" width="100">Link</th>
+                                    <th scope="col" width="max-content">Fraction</th>
+                                    <th scope="col" width="fit-content">Points <span class="Instructor_Mode">|
+                                            Award</span></th>
+                                    <!--                     <th class="Instructor_Mode" scope="col" hidden="" width="43">Full/Partial</th> -->
+                                    <!--                    <th class="Instructor_Mode" scope="col" hidden="" width="25">Awarded</th> -->
+                                    <th class="Instructor_Mode" scope="col" width="200">Comments</th>
+                                </tr>
+                            </thead>
+                            <tbody data-zxw-mvc="dynamic-content">                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section id="Section_5">
+                <h2 class="nocount"> Academic Integrity</h2>
+                <p>See the course syllabus regarding partial credit and the late penalty policy.   <br> </p>
+                <ul>
+                    <li>This is an individual assignment.   Each student must write and submit their own unique code,
+                        logs, answers, etc.</li>
+                    <li>However, feel free work together in pairs or groups and discussing the readings and concepts.
+                    </li>
+                </ul>
+                <p><br> Cheating in any form is subject to disciplinary action (UNCC Catalog, pages 275-278).<br> <br>
+                    The TA will be running the submitted code through various plagiarism detection software such as
+                    TurnitIn. </p>
+                <p>If you have questions about whether using a particular resource or collaborative strategy is
+                    acceptable or not, email the TA and/or Professor. <br> </p>
+            </section>
+        </article>
+    </div>
+</body>
+
+</html>
