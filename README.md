@@ -15,3 +15,7 @@ Examples:
 - $ cd your_local_repo_directory
 - $ . .zxw
     - the above initializes the local bash shell environment, setting various bash environment variables and making various bash scripts available on the path
+
+## Draft User Guide
+
+See [git-modules/zjw-generic-instructions/docs/zjw-generic-instructions-manual.html](git-modules/zjw-generic-instructions/docs/zjw-generic-instructions-manual.html)
