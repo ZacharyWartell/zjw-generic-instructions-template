@@ -14,4 +14,4 @@ Examples:
 - To initialize a session for developing your your new assignment description
 - $ cd your_local_repo_directory
 - $ . .zxw
-- # the above initializes the local bash shell environment, setting various bash environment variables and making various bash scripts available on the path
+    - the above initializes the local bash shell environment, setting various bash environment variables and making various bash scripts available on the path
